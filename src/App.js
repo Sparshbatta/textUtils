@@ -2,7 +2,6 @@ import {useState} from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
 import Alert from './components/Alert';
 
 function App() {
@@ -14,6 +13,11 @@ function App() {
       msg:msg,
       type:type
     });
+
+    //set alert to null after 3 seconds
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
   }
 
   const toggleMode=()=>{
@@ -21,11 +25,22 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor='#3e3b3b';
       showAlert('Dark mode has been enabled','success');
+      document.title='TextUtils-Dark Mode Enabled';
+      
+      /*code to toggle between two titles in the tab*/
+
+      // setInterval(()=>{
+      //   document.title='TextUtils is Amazing!';
+      // },3000);
+      // setInterval(()=>{
+      //   document.title='Get TextUtils Now!';
+      // },2000);
     }
     else{
       setMode('light');
       document.body.style.backgroundColor='white';
       showAlert('Light mode has been enabled','success');
+      document.title='TextUtils-Light Mode Enabled';
     }
   }
 
