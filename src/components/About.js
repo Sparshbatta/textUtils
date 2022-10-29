@@ -1,86 +1,60 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-export default function About() {
+export default function About(props) {
 
-    const [myStyle,setMyStyle]=useState({
-        color:'white',
-        backgroundColor:'black',
-    });
-
-    const [btnStyle,setBtnStyle]=useState({
-        backgroundColor:'red'
-    })
     
-    const [btnText,setBtnText]=useState((myStyle.color==='black')?'Enable Dark Mode':'Disable Dark Mode');
-
-    const toggleStyle=()=>{
-        if(myStyle.color==='white'){
-            setMyStyle({
-            color:'black',
-            backgroundColor:'white'
-        });
-        setBtnText('Enable Dark Mode');
-        setBtnStyle({
-            backgroundColor:'green'
-        });
-        }
-        else{
-            setMyStyle({
-                color:'white',
-                backgroundColor:'black'
-            });
-            setBtnText('Disable Dark Mode');
-            setBtnStyle({
-                backgroundColor:'red'
-            })
-        }
+    let myStyle={
+        color:props.mode==='dark'?'white':'#042743',
+        backgroundColor:props.mode==='dark'?'rgb(40 75 102)':'white',
+        border:'2 px solid',
+        borderColor:props.mode==='dark'?'#042743':'white'
     }
- 
+
+    let myHeader={
+        color:props.mode==='dark'?'white':'black'
+    }
+
     return (
-        <div className='container' style={myStyle}>
-            <h2>About Us</h2>
+        <div className='container'>
+            <h2 style={myHeader}>About Us</h2>
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
                         <button className="accordion-button" type="button" style={myStyle} data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Accordion Item #1
+                            Analyze text of any length
                         </button>
                     </h2>
                     <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>No text limit!</strong> Feel free to add as many text as you want for the purpose of analysis and modification. With faster processing and quick results, our site assures premium user experience that does not jeopardise with your pocket money.
                         </div>
                     </div>
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingTwo">
                         <button className="accordion-button collapsed" type="button" style={myStyle} data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Accordion Item #2
+                            Free and Easy to Use
                         </button>
                     </h2>
                     <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>For beginners!</strong> Specially designed for all people ranging from beginners to advanced, easy to use and fairly easy to analyze, and you can avail all of this comes at no cost.
                         </div>
                     </div>
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingThree">
                         <button className="accordion-button collapsed" type="button" style={myStyle} data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
+                            Browser Compatible
                         </button>
                     </h2>
                     <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>Don't worry about inconsistencies!</strong> Compatible with all the popular modern gen. browsers like Opera, Chrome, Firefox, Edge and Brave.
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="container py-3">
-                <button type='button' style={btnStyle} onClick={toggleStyle} className='btn btn-success'>{btnText}</button>
-            </div>
-            
         </div>
     )
 }

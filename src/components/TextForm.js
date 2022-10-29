@@ -12,6 +12,10 @@ export default function TextForm(props){
         textInfo.select();
         navigator.clipboard.writeText(textInfo.value);
         setCopiedNotification('Your text has been copied successfully');
+        setTimeout(()=>{
+            setCopiedNotification('');
+        },2000);
+        document.getSelection().removeAllRanges();
         props.showAlert('Text has been copied to clipboard','success');
     }
 
@@ -52,23 +56,23 @@ export default function TextForm(props){
         <>
             <div className='container' style={{color:(props.mode==='dark')?'white':'black'}}>
                 <h1>{props.heading}</h1>
-                <p style={{color:'green'}}>{copiedNotification}</p>
+                <p style={{color:'green',height:'20px'}}>{copiedNotification}</p>
                 <div className="mb-3">
-                    <textarea className="form-control" style={{background:(props.mode==='dark')?'grey':'white',color:(props.mode==='dark')?'white':'black'}} value={text} onChange={handleOnChange} id="myBox" rows="10"></textarea>
+                    <textarea className="form-control" style={{background:(props.mode==='dark')?'#201d1d':'white',color:(props.mode==='dark')?'white':'black'}} value={text} onChange={handleOnChange} id="myBox" rows="10"></textarea>
                 </div>
-                <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to UpperCase</button>
-                <button className='btn btn-success mx-1' onClick={handleLowClick}>Convert to LowerCase</button>
-                <button className='btn btn-danger mx-1' onClick={handleClearClick}>Clear Text</button>
-                <button className='btn btn-warning mx-1' onClick={handleExtraSpaces}>Trim Extra Spaces</button>
-                <i type='button' className='bi bi-clipboard-check mx-2' onClick={handleCopyText}></i>
+                <button disabled={text.split(' ').filter((element)=>{return element}).length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick} title='To Uppercase!'>Convert to UpperCase</button>
+                <button disabled={text.split(' ').filter((element)=>{return element}).length===0} className='btn btn-success mx-1 my-1' onClick={handleLowClick} title='To Lowercase!'>Convert to LowerCase</button>
+                <button disabled={text.split(' ').filter((element)=>{return element}).length===0} className='btn btn-danger mx-1 my-1' onClick={handleClearClick} title='Clear Text!'>Clear Text</button>
+                <button disabled={text.split(' ').filter((element)=>{return element}).length===0} className='btn btn-warning mx-1 my-1' onClick={handleExtraSpaces} title='Clear Extra Spaces!'>Trim Extra Spaces</button>
+                <i type='button' className='bi bi-clipboard-check mx-2' onClick={handleCopyText} title='Copy Text!'></i>
             </div>
 
             <div className='container my-3' style={{color:(props.mode==='dark')?'white':'black'}}>
                 <h1>Your Text Summary</h1>
-                <p>{text===""?0:text.split(" ").length} words, {text.length} characters</p>
-                <p>{0.008*(text===""?0:text.split(" ").length)} minutes read</p>
+                <p>{text.split(" ").filter((element)=>{return element}).length} words, {text.length} characters</p>
+                <p>{0.008*(text.split(" ").filter((element)=>{return element}).length)} minutes read</p>
                 <h2>Preview</h2>
-                <p>{text.length>0?text:'Enter something to preview here'}</p>
+                <p>{text.length>0?text:'Nothing to preview!'}</p>
             </div>
         </>
     )
