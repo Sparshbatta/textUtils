@@ -36,7 +36,11 @@ function App() {
     document.body.classList.add('bg-'+type);
   }
 
-  const toggleMode=()=>{
+  const toggleMode=(color)=>{
+    removeAllTypes();
+    if(mode===color)
+      return;
+    setMode(color);
     if(mode=== 'light'){
       setMode('dark');
       document.body.style.backgroundColor='#3e3b3b';

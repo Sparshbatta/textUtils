@@ -3,6 +3,13 @@ import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 
 export default function Navbar(props) {
+    let btnStyle={
+       height:'30px',
+       width:'30px',
+       cursor:'pointer',
+       border:'2px solid',
+       borderColor:(props.mode==='light')?'black':'white'
+    }
     return (
         <div>
             <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
@@ -14,22 +21,21 @@ export default function Navbar(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                                <Link className="nav-link" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/about">{props.info}</Link>
                             </li>
                         </ul>
                         <div className="d-flex">
-                            <div className="bg-primary rounded mx-2" style={{height:'30px',width:'30px',cursor:'pointer'}}  onClick={()=>{props.toggleColor('primary')}}></div>
-                            <div className="bg-danger rounded mx-2" style={{height:'30px',width:'30px',cursor:'pointer'}}  onClick={()=>{props.toggleColor('danger')}}></div>
-                            <div className="bg-success rounded mx-2" style={{height:'30px',width:'30px',cursor:'pointer'}}  onClick={()=>{props.toggleColor('success')}}></div>
-                            <div className="bg-warning rounded mx-2" style={{height:'30px',width:'30px',cursor:'pointer'}}  onClick={()=>{props.toggleColor('warning')}}></div>
-                        </div>
-                        <div className={`form-check form-switch text-${(props.mode==='dark')?'light':'dark'}`}>
-                            <input className="form-check-input" type="checkbox" role="switch"  onClick={props.toggleMode} id="flexSwitchCheckDefault" />
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Toggle Mode</label>
-                        </div>
+                            <div className="bg-primary rounded mx-2" style={btnStyle}  onClick={()=>{props.toggleColor('primary')}}></div>
+                            <div className="bg-danger rounded mx-2" style={btnStyle}  onClick={()=>{props.toggleColor('danger')}}></div>
+                            <div className="bg-success rounded mx-2"  style={btnStyle} onClick={()=>{props.toggleColor('success')}}></div>
+                            <div className="bg-warning rounded mx-2" style={btnStyle}  onClick={()=>{props.toggleColor('warning')}}></div>
+                            <div className='mx-2' style={{color:(props.mode==='light')?'black':'white'}}>Modes</div>
+                            <div className="bg-white rounded mx-2"  style={btnStyle} onClick={()=>{props.toggleMode('light')}}></div>
+                            <div className="bg-dark rounded mx-2" style={btnStyle}  onClick={()=>{props.toggleMode('dark')}}></div>
+                        </div>  
                     </div>
                 </div>
             </nav>
